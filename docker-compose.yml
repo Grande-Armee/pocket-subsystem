@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    container_name: 'rabbitmq'
+    image: rabbitmq:3.9.7-management-alpine
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBIT_MQ_USERNAME}
+      - RABBITMQ_DEFAULT_PASS=${RABBIT_MQ_PASSWORD}
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    networks:
+      - pocket-network
+    env_file:
+      - ./.env
+networks:
+  pocket-network:
+    name: pocket-network
+    driver: bridge
